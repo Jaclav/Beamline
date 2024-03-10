@@ -18,7 +18,7 @@
 
 #include "detector.hh"
 
-extern G4double CPb;
+extern G4double *parameters;
 constexpr G4double dBi = 9.78, dPb = 11.34;
 
 class Construction : public G4VUserDetectorConstruction {

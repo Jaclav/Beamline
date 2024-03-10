@@ -9,14 +9,25 @@
 #include "physics.hh"
 #include "action.hh"
 
-G4double CPb = 0;
+G4double *parameters;
 
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
-	if(argc > 1)
-		CPb = std::stoi(argv[1]);
-	else
+	parameters = new G4double[5];
+	if(argc > 1) {
+		/*
+		0 - L (cm)
+		1 - %m Pb
+		*/
+		for(int i = 1; i < argc; i++) {
+			parameters[i - 1] = std::stoi(argv[i]);
+		}
+	}
+	else {
+		parameters[0] = 45;
+		parameters[1] = 50;
 		ui = new G4UIExecutive(argc, argv);
+	}
 
 	G4RunManager *runManager = new G4RunManager();
 	runManager->SetUserInitialization(new Construction());

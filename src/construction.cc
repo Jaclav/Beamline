@@ -26,12 +26,13 @@ G4VPhysicalVolume *Construction::Construct() {
 
 	// blok 4x4x10
 	//https://sci-hub.st/http://dx.doi.org/10.1080/10420150601045382
-	std::cerr << "Pb%" << CPb << "d" << 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi) << '\n';
+	G4double CPb = parameters[1], L = parameters[0];
+	std::cerr << "L=" << L << "Pb%=" << CPb << "d=" << 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi) << '\n';
 	G4Material *Block = new G4Material("Block", 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi)*g / cm3, 2);
 	Block->AddElement(nist->FindOrBuildElement("Pb"), CPb * perCent) ;
 	Block->AddElement(nist->FindOrBuildElement("Bi"), (100 - CPb)* perCent) ;
 
-	G4Box *solidBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, 0.05 * m);
+	G4Box *solidBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, L / 200. * m);
 	G4LogicalVolume *logicalBlock = new G4LogicalVolume(solidBlock, Block, "logicalBlock");
 	G4VPhysicalVolume *physBlock = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicalBlock, "physBlock", logicalWorld, false, 0, true);
 
