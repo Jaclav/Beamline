@@ -18,6 +18,7 @@ int main(int argc, char** argv) {
 		/*
 		0 - L (cm)
 		1 - %m Pb
+		2 - E p (100 MeV)
 		*/
 		for(int i = 1; i < argc; i++) {
 			parameters[i - 1] = std::stoi(argv[i]);
@@ -25,7 +26,8 @@ int main(int argc, char** argv) {
 	}
 	else {
 		parameters[0] = 45;
-		parameters[1] = 50;
+		parameters[1] = 75;
+		parameters[2] = 10;
 		ui = new G4UIExecutive(argc, argv);
 	}
 

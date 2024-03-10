@@ -8,6 +8,7 @@
 #include "G4UniformRandPool.hh"
 #include "G4Proton.hh"
 
+extern G4double *parameters;
 class MyGenerator : public G4VUserPrimaryGeneratorAction {
 public:
 	MyGenerator();

@@ -8,7 +8,8 @@ MyGenerator::MyGenerator() {
 
 	G4ThreeVector momentum(0, 0, 1.);
 	fParticleGun->SetParticleMomentumDirection(momentum);
-	fParticleGun->SetParticleMomentum(10 * GeV);
+	fParticleGun->SetParticleEnergy(parameters[2] / 10 * GeV);
+	std::cerr << fParticleGun->GetParticleEnergy() << '\n';
 }
 
 MyGenerator::~MyGenerator () {
