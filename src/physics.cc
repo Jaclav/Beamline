@@ -5,9 +5,9 @@
 #include "G4ComptonScattering.hh"
 
 MyPhysicsList::MyPhysicsList() {
-	RegisterPhysics (new G4EmStandardPhysics());
+	RegisterPhysics (new G4EmStandardPhysics(false));
 	// RegisterPhysics (new G4OpticalPhysics());
-	RegisterPhysics (new G4HadronPhysicsShielding());
+	RegisterPhysics (new G4HadronPhysicsShielding(false));
 }
 
 MyPhysicsList::~ MyPhysicsList() {

@@ -11,25 +11,26 @@
 
 G4double *parameters;
 
+/**
+ * @param argc 1 when UI, 1 < when command line
+ * @param argv
+ * |   i   | parameter |  units  | default |
+ * | :---: | :-------: | :-----: | :-----: |
+ * |   0   |     L     |  (cm)   |   45    |
+ * |   1   |    Pb     |   %m    |   75    |
+ * |   2   |     p     | (Gev/c) |   10    |
+ */
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
-	parameters = new G4double[5];
+	G4double parametersDefault[] = {45, 100, 10};
+	parameters = parametersDefault;
 	if(argc > 1) {
-		/*
-		0 - L (cm)
-		1 - %m Pb
-		2 - E p (100 MeV)
-		*/
 		for(int i = 1; i < argc; i++) {
 			parameters[i - 1] = std::stoi(argv[i]);
 		}
 	}
-	else {
-		parameters[0] = 45;
-		parameters[1] = 75;
-		parameters[2] = 10;
+	else
 		ui = new G4UIExecutive(argc, argv);
-	}
 
 	G4RunManager *runManager = new G4RunManager();
 	runManager->SetUserInitialization(new Construction());

@@ -15,12 +15,13 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory *ROhis
 	G4StepPoint *postStepPoint = aStep->GetPostStepPoint();
 
 	if(std::round(preStepPoint->GetMass()) == 940) {
-		std::cerr << "NN\n";
+		std::cout << "NN\n";
 	}
-	std::cerr << preStepPoint->GetMass() << ";" <<
+	std::cout << preStepPoint->GetMass() << ";" <<
 	          preStepPoint->GetCharge() << ";" <<
 	          preStepPoint->GetPosition().x() << ";" <<
 	          preStepPoint->GetPosition().y() << ";" <<
+	          preStepPoint->GetPosition().z() << ";" <<
 	          preStepPoint->GetKineticEnergy() << "\n";
 	return true;
 }

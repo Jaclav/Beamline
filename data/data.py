@@ -23,6 +23,7 @@ Quantity = {
     "T": 0,
     "Σ+": 0,
     "Σ-": 0,
+    "He3": 0,
 }
 
 
@@ -44,12 +45,13 @@ def Name(mass):
         "1115.68": "Λ",
         "493.677": "K+-",
         "2808.92": "T",
+        "2808.39": "He3",
     }
     Quantity[Names[mass]] += 1
     return Names[mass]
 
 
-Colors = {"-1": "red", "0": "green", "1": "blue"}
+Colors = {"-1": "red", "0": "green", "1": "blue", "2": "cyan"}
 
 fig, ax = plt.subplots()
 plt.xlabel("X")
@@ -70,10 +72,12 @@ while not str == "":
     str = str[str.find(";") + 1 :]
     Y = str[: str.find(";")]
     str = str[str.find(";") + 1 :]
+    Z = str[: str.find(";")]
+    str = str[str.find(";") + 1 :]
     E = str[: str.find(";")]
 
     plt.scatter([float(X)], [float(Y)], color=Colors[charge])
-    ax.annotate(Name(mass), (float(X), float(Y)), fontsize=10)
+    ax.annotate(Name(mass), (float(X), float(Z)), fontsize=10)
 
 plt.gca().legend(("-", "0", "+"))
 leg = ax.get_legend()
