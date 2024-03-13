@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <chrono>
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
 #include "G4VisManager.hh"
@@ -10,6 +12,7 @@
 #include "action.hh"
 
 G4double *parameters;
+std::fstream outFile;
 
 /**
  * @param argc 1 when UI, 1 < when command line
@@ -21,6 +24,8 @@ G4double *parameters;
  * |   2   |     p     | (Gev/c) |   10    |
  */
 int main(int argc, char** argv) {
+	std::time_t result = std::time(nullptr);
+	outFile.open(std::string(std::ctime(&result)) + ".csv", std::ios::app);
 	G4UIExecutive *ui = nullptr;
 	G4double parametersDefault[] = {45, 100, 10};
 	parameters = parametersDefault;
@@ -31,6 +36,9 @@ int main(int argc, char** argv) {
 	}
 	else
 		ui = new G4UIExecutive(argc, argv);
+	outFile << "# Parameters: ";
+	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++)outFile << parameters[i] << ' ';
+	outFile << "\n";
 
 	G4RunManager *runManager = new G4RunManager();
 	runManager->SetUserInitialization(new Construction());
@@ -63,5 +71,6 @@ int main(int argc, char** argv) {
 		delete ui;
 	}
 
+	outFile.close();
 	return 0;
 }

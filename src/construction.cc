@@ -13,13 +13,14 @@ G4VPhysicalVolume *Construction::Construct() {
 
 	//powietrze 1x1x1
 	G4Material *worldMat = nist->FindOrBuildMaterial("G4_AIR");
-	G4Box *solidWorld = new G4Box("solidWorld", 0.5 * m, 0.5 * m, .5 * m);
+	G4Box *solidWorld = new G4Box("solidWorld", 1.5 * m, 1.5 * m, 1.5 * m);
 	G4LogicalVolume *logicalWorld = new G4LogicalVolume(solidWorld, worldMat, "logicalW");
 	G4VPhysicalVolume *physWorld = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicalWorld, "physWorld", 0, false, 0, true);
 
 	// //pole magnetyczne
 	// G4FieldManager* fieldMgr = G4TransportationManager::GetTransportationManager()->GetFieldManager();
-	// G4MagneticField* magField = new	G4UniformMagField( G4ThreeVector(0., 0.0, 5.0 * tesla));
+	// G4MagneticField *magField = new MyMagneticField(1.0 * tesla);
+	// // G4MagneticField* magField = new	G4UniformMagField( G4ThreeVector(0, 1.0 * tesla, 0));
 	// fieldMgr->SetDetectorField(magField);
 	// fieldMgr->CreateChordFinder(magField);
 	// logicalWorld->SetFieldManager(fieldMgr, true);
@@ -27,7 +28,7 @@ G4VPhysicalVolume *Construction::Construct() {
 	// blok 4x4x10
 	//https://sci-hub.st/http://dx.doi.org/10.1080/10420150601045382
 	G4double CPb = parameters[1], L = parameters[0];
-	std::cout << "L=" << L << "cm Pb=" << CPb << "%m d=" << 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi) << '\n';
+	outFile << "# L=" << L << "cm Pb=" << CPb << "%m d=" << 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi) << '\n';
 	G4Material *Block = new G4Material("Block", 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi)*g / cm3, 2);
 	Block->AddElement(nist->FindOrBuildElement("Pb"), CPb * perCent) ;
 	Block->AddElement(nist->FindOrBuildElement("W"), (100 - CPb)* perCent) ;

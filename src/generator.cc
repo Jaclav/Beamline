@@ -9,14 +9,16 @@ MyGenerator::MyGenerator() {
 	G4ThreeVector momentum(0, 0, 1.);
 	fParticleGun->SetParticleMomentumDirection(momentum);
 	fParticleGun->SetParticleMomentum(parameters[2] * GeV);
-	std::cout << "p=" << fParticleGun->GetParticleMomentum() << "MeV/c ";
+	outFile << "# Name=" << particle->GetParticleName() << " p=" << fParticleGun->GetParticleMomentum() / 1000. << "GeV/c\n";
 }
 MyGenerator::~MyGenerator () {
 	delete fParticleGun;
 }
 
 void MyGenerator::GeneratePrimaries(G4Event * event) {
-	G4ThreeVector pos((G4UniformRand() - 0.5) * 0.02 * m, (G4UniformRand() - 0.5) * 0.02 * m, -0.5 * m);
+	//todo do it circle
+	// G4ThreeVector pos((G4UniformRand() - 0.5) * 0.02 * m, (G4UniformRand() - 0.5) * 0.02 * m, -0.5 * m);
+	G4ThreeVector pos(0.02 * m, 0.02 * m, -0.5 * m);
 	fParticleGun->SetParticlePosition(pos);
 	fParticleGun->GeneratePrimaryVertex(event);
 

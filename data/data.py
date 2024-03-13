@@ -7,12 +7,12 @@ str = f.readline()
 print(str)
 
 Quantity = {
-    "γ": 0,
-    "e": 0,
-    "π0": 0,
-    "π+-": 0,
-    "p": 0,
     "n": 0,
+    "γ": 0,
+    "p": 0,
+    "e": 0,
+    "π+-": 0,
+    "π0": 0,
     "η'": 0,
     "η": 0,
     "D": 0,
@@ -63,6 +63,8 @@ while not str == "":
     str = f.readline()
     if str == "":
         break
+    if str[0] == "#":
+        continue
 
     mass = str[: str.find(";")]
     str = str[str.find(";") + 1 :]
@@ -76,7 +78,7 @@ while not str == "":
     str = str[str.find(";") + 1 :]
     E = str[: str.find(";")]
 
-    plt.scatter([float(X)], [float(Y)], color=Colors[charge])
+    plt.scatter([float(X)], [float(Z)], color=Colors[charge])
     ax.annotate(Name(mass), (float(X), float(Z)), fontsize=10)
 
 plt.gca().legend(("-", "0", "+"))

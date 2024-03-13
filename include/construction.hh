@@ -17,7 +17,10 @@
 #include "G4TransportationManager.hh"
 
 #include "detector.hh"
+#include "MyMagneticField.hh"
+#include <fstream>
 
+extern std::fstream outFile;
 extern G4double *parameters;
 constexpr G4double dBi = 9.78, dPb = 11.34;
 

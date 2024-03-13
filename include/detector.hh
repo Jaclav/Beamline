@@ -5,6 +5,7 @@
 #include "G4StepPoint.hh"
 #include <fstream>
 
+extern std::fstream outFile;
 class MySensitiveDetector: public G4VSensitiveDetector {
 public:
 	MySensitiveDetector(G4String);

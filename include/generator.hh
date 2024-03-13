@@ -7,7 +7,11 @@
 #include "G4SystemOfUnits.hh"
 #include "G4UniformRandPool.hh"
 #include "G4Proton.hh"
+#include "G4Neutron.hh"
+#include "G4PionPlus.hh"
+#include <fstream>
 
+extern std::fstream outFile;
 extern G4double *parameters;
 class MyGenerator : public G4VUserPrimaryGeneratorAction {
 public:
