@@ -1,0 +1,8 @@
+/vis/open TSG
+/vis/viewer/set/viewpointVector -1 0 0.5
+/vis/viewer/set/autoRefresh true
+
+/vis/drawVolume
+/vis/scene/add/trajectories smooth
+/vis/scene/endOfEventAction accumulate
+/vis/scene/add/axes

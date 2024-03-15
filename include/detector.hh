@@ -2,10 +2,15 @@
 #define DETECTOR_HH
 
 #include "G4VSensitiveDetector.hh"
+#include "G4ParticleTable.hh"
 #include "G4StepPoint.hh"
 #include <fstream>
+#include <map>
 
 extern std::fstream outFile;
+extern std::map<int, G4ParticleDefinition*> massTable;//mass in KeV to particle data
+extern std::map<int, int> particleCounts;//mass to particleCounts
+
 class MySensitiveDetector: public G4VSensitiveDetector {
 public:
 	MySensitiveDetector(G4String);
