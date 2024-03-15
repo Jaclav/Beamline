@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 		delete ui;
 	}
 	else
-		UImanager->ApplyCommand("/run/beamOn 100000");
+		UImanager->ApplyCommand("/control/execute/cli.mac");
 
 	std::cout << "ParticleCounts neutrons: ";
 	std::cout << particleCounts[(int)std::round(G4Neutron::Definition()->GetPDGMass() * 1000.f)];
