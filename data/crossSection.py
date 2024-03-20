@@ -1,30 +1,26 @@
 #!/usr/bin/env python3
-# calculate cross section for LEAD
+# calculate cross section for Lead 208
 from math import *
 
-dPb = 11340  # kg/m^3
-NA = 6.0221415e23
-mu = 207e-3  # kg/mol
+dPb = 11340  # lead density kg/m^3
+NA = 6.0221415e23  # avogadro constant
+mu = 207.217e-3  # kg/mol
 
-S = 16e-4
-L = 0.8
-V = L * S
-
-N = NA * dPb * V / mu
+dN = NA * dPb / mu  # density of number of lead nuclei in bar
 
 p0 = 10000
 C = 925060 / p0  # 10GeV
 
-# Przekrój czynny dla elektronu reagującego z ołowiem Orear tom 2
+# cross section of lead nuclei for interaction with  electron source: Orear Physics vol. 2
 R = 7.5e-15
-print("σe=" + str(pi * R**2))
+print("σ\u2091\u208B=" + str(pi * R**2))
 
-# przekrój czynny dla protonu reagującego z ołowiem
+# cross section of lead nuclei for interaction with proton from our simulation data
 x = 0.25
 Nn = 635183
-print("σp=" + str((L * S / (N * x)) * log((p0 * C) / (p0 * C - Nn))))
+print("σ\u209A\u208A=" + str(1 / (dN * x) * log((p0 * C) / (p0 * C - Nn))))
 
-# pole powierzchni poprzecznej ołowiu https://inspirehep.net/files/8cb839c04600858cdde2de6640a11bbc
+# cross section of lead nuclei as non interacting ball source: https://inspirehep.net/files/8cb839c04600858cdde2de6640a11bbc
 print(
     "S="
     + str((pi * (5.56e-15) ** 2) * 10 ** (-floor(log10(pi * (5.56e-15) ** 2))) / 10)

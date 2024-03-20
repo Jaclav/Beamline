@@ -25,13 +25,12 @@ G4VPhysicalVolume *Construction::Construct() {
 	// fieldMgr->CreateChordFinder(magField);
 	// logicalWorld->SetFieldManager(fieldMgr, true);
 
-	// blok 4x4x10
+	// blok 4x4x10 of lead A=207.2 density=11.34
 	//https://sci-hub.st/http://dx.doi.org/10.1080/10420150601045382
 	G4double CPb = parameters[1], L = parameters[0];
-	G4Material *Block = new G4Material("Block", 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi)*g / cm3, 1);
-	Block->AddElement(nist->FindOrBuildElement("Pb"), CPb * perCent) ;
-	// Block->AddElement(nist->FindOrBuildElement("W"), (100 - CPb)* perCent) ;
-	outFile << "# L=" << L << "cm Pb=" << CPb << "%m d=" << 1 / ((CPb / 100) / dPb + ((1 - CPb / 100) ) / dBi) << '\n';
+	G4Material *Block = new G4Material("Block", dPb * g / cm3, 1);
+	Block->AddElement(nist->FindOrBuildElement("Pb"), 100 * perCent) ;
+	outFile << "# L=" << L << "cm Pb=" << CPb << "%m d=" << dPb*cm3 / g << '\n';
 
 	G4Box *solidBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, L / 200. * m);
 	G4LogicalVolume *logicalBlock = new G4LogicalVolume(solidBlock, Block, "logicalBlock");
