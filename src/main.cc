@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	std::time_t result = std::time(nullptr);
 	std::string name = std::string(std::ctime(&result));
 	outFile.open(name.substr(0, name.end() - name.begin() - 3) + ".csv\0", std::ios::app);
-	outFile << "# " << __TIME__ << " Parameters:";
+	outFile << "# " << __TIME__ << __DATE__ << " Parameters:";
 	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++)outFile << ' ' << parameters[i];
 	outFile << "\n";
 
@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 		delete ui;
 	}
 	else
-		UImanager->ApplyCommand("/control/execute/cli.mac");
+		UImanager->ApplyCommand("/control/execute cli.mac");
 
 	std::cout << "ParticleCounts neutrons: ";
 	std::cout << particleCounts[(int)std::round(G4Neutron::Definition()->GetPDGMass() * 1000.f)];

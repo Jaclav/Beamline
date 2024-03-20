@@ -38,7 +38,7 @@ G4VPhysicalVolume *Construction::Construct() {
 	G4VPhysicalVolume *physBlock = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicalBlock, "physBlock", logicalWorld, false, 0, false);
 
 	//detektory 1x1x2
-	G4Tubs *solidDetector = new G4Tubs("solidDetector", 0.05 * m, 0.06 * m, 0.30 * m, 90 * deg, 3600 * deg);
+	G4Tubs *solidDetector = new G4Tubs("solidDetector", 0.05 * m, 0.06 * m, 0.50 * m, 90 * deg, 3600 * deg);
 	// G4Box *solidDetector = new G4Box("solidDetector", 0.005 * m,  0.01 * m, 0.005 * m);
 	logicDetector = new G4LogicalVolume(solidDetector, worldMat, "logicDetector");
 	// for(G4int i = 0; i < 100; i++) {
