@@ -30,7 +30,7 @@ G4VPhysicalVolume *Construction::Construct() {
 	G4double CPb = parameters[1], L = parameters[0];
 	G4Material *Block = new G4Material("Block", dPb * g / cm3, 1);
 	Block->AddElement(nist->FindOrBuildElement("Pb"), 100 * perCent) ;
-	outFile << "# L=" << L << "cm " << nist->FindOrBuildElement("Pb")->GetAtomicMassAmu() << "Pb=" << CPb << "%m d=" << dPb*cm3 / g << '\n';
+	outFile << "# L=" << L << "cm " << nist->FindOrBuildElement("Pb")->GetAtomicMassAmu() << "Pb=" << CPb << "%m d=" << dPb << '\n';
 	G4Box *solidBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, L / 200. * m);
 	G4LogicalVolume *logicalBlock = new G4LogicalVolume(solidBlock, Block, "logicalBlock");
 	G4VPhysicalVolume *physBlock = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicalBlock, "physBlock", logicalWorld, false, 0, false);

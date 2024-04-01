@@ -30,11 +30,9 @@ int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
 	G4double parametersDefault[] = {45, 100, 10};
 	parameters = parametersDefault;
-	if(argc > 1) {
-		for(int i = 1; i < argc; i++) {
+	if(argc > 1)
+		for(int i = 1; i < argc; i++)
 			parameters[i - 1] = std::stod(argv[i]);
-		}
-	}
 	else
 		ui = new G4UIExecutive(argc, argv);
 
@@ -46,9 +44,13 @@ int main(int argc, char** argv) {
 		ss << " " << parameters[i];
 		name += ss.str();
 	}
+	for(int i = 0; i < name.size(); i++)
+		if(name[i] == ' ')
+			name[i] = '_';
 	outFile.open(name + ".csv\0", std::ios::app);
 	outFile << "# " << __TIME__ << __DATE__ << " Parameters:";
-	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++)outFile << ' ' << parameters[i];
+	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++)
+		outFile << ' ' << parameters[i];
 	outFile << "\n";
 
 	G4RunManager *runManager;
@@ -77,8 +79,16 @@ int main(int argc, char** argv) {
 		delete visManager;
 		delete ui;
 	}
-	else
+	else {
+		std::fstream file("cli.mac");
+		if(!file.good())
+			std::cerr << "ERROR: " << __LINE__ << __FILE__ << '\n';
+		std::string str;
+		while(std::getline(file, str)) {
+			outFile << "# " << str << "\n";
+		}
 		UImanager->ApplyCommand("/control/execute cli.mac");
+	}
 
 	std::cout << "ParticleCounts neutrons: ";
 	std::cout << particleCounts[(int)std::round(G4Neutron::Definition()->GetPDGMass() * 1000.f)];
