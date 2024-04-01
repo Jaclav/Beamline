@@ -24,7 +24,7 @@ std::map<int, int> particleCounts;//mass to particleCounts
  * | :---: | :-------: | :-----: | :-----: |
  * |   0   |     L     |  (cm)   |   45    |
  * |   1   |    Pb     |   %m    |   100   |
- * |   2   |     p     | (Gev/c) |   10    |
+ * |   2   |     E     | (Gev)   |   10    |
  */
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
@@ -40,7 +40,13 @@ int main(int argc, char** argv) {
 
 	std::time_t result = std::time(nullptr);
 	std::string name = std::string(std::ctime(&result));
-	outFile.open(name.substr(0, name.end() - name.begin() - 3) + ".csv\0", std::ios::app);
+	name = name.substr(0, name.end() - name.begin() - 1);
+	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++) {
+		std::stringstream ss;
+		ss << " " << parameters[i];
+		name += ss.str();
+	}
+	outFile.open(name + ".csv\0", std::ios::app);
 	outFile << "# " << __TIME__ << __DATE__ << " Parameters:";
 	for(int i = 0; i < sizeof(parametersDefault) / sizeof(G4double); i++)outFile << ' ' << parameters[i];
 	outFile << "\n";
