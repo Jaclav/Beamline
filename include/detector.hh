@@ -4,6 +4,8 @@
 #include "G4VSensitiveDetector.hh"
 #include "G4ParticleTable.hh"
 #include "G4StepPoint.hh"
+#include "G4SystemOfUnits.hh"
+#include "G4PhysicalConstants.hh"
 #include <fstream>
 #include <map>
 

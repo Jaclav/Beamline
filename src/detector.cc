@@ -24,9 +24,9 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory *ROhis
 	if(!massTable.count((int)std::round(preStepPoint->GetMass() * 1000.f))) {
 		//IDK why this happens
 		std::cerr << "!!!!! UNKOWN:" <<
-		          preStepPoint->GetMass() << ' ' <<
-		          preStepPoint->GetKineticEnergy() << ' ' <<
-		          preStepPoint->GetCharge() << '\n';
+		          preStepPoint->GetCharge() << "C\t" <<
+		          preStepPoint->GetMass() / amu_c2 << "u(" << preStepPoint->GetMass() << "MeV)\t" <<
+		          preStepPoint->GetKineticEnergy() << '\n';
 		return true;
 	}
 
