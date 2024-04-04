@@ -1,3 +1,4 @@
+#script to get number of perpendicular and parallel counts
 i=5
 ls $1/*.csv | while read a;
 do
