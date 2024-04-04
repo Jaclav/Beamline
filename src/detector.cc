@@ -6,6 +6,7 @@ static std::mutex initMtx;
 
 MySensitiveDetector::MySensitiveDetector(G4String name): G4VSensitiveDetector(name) {
 	initMtx.lock();
+	mName = name;
 	G4ParticleTable *pt = G4ParticleTable::GetParticleTable();
 	for(int i = 0; i < pt->size(); i++)
 		massTable[(int)std::round(pt->FindParticle(pt->GetParticleName(i))->GetPDGMass() * 1000)] = pt->FindParticle(pt->GetParticleName(i));
@@ -23,10 +24,10 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory *ROhis
 
 	if(!massTable.count((int)std::round(preStepPoint->GetMass() * 1000.f))) {
 		//IDK why this happens
-		std::cerr << "!!!!! UNKOWN:" <<
-		          preStepPoint->GetCharge() << "C\t" <<
-		          preStepPoint->GetMass() / amu_c2 << "u(" << preStepPoint->GetMass() << "MeV)\t" <<
-		          preStepPoint->GetKineticEnergy() << '\n';
+		std::cerr << "#!!!!! UNKOWN:" <<
+		        preStepPoint->GetCharge() << "C\t" <<
+		        preStepPoint->GetMass() / amu_c2 << "u(" << preStepPoint->GetMass() << "MeV)\t" <<
+		        preStepPoint->GetKineticEnergy() << '\n';
 		return true;
 	}
 
@@ -35,11 +36,11 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory *ROhis
 
 	outFile << preStepPoint->GetMass() << ';' <<
 	        preStepPoint->GetCharge() << ';' <<
-	        preStepPoint->GetPosition().x() << ';' <<
-	        preStepPoint->GetPosition().y() << ';' <<
-	        preStepPoint->GetPosition().z() << ';' <<
+	        preStepPoint->GetPosition().x() << ';' <<//it is in mm
+	        preStepPoint->GetPosition().y() << ';' <<//it is in mm
+	        preStepPoint->GetPosition().z() << ';' <<//it is in mm
 	        preStepPoint->GetKineticEnergy() << ';' <<
-	        massTable[(int)std::round(preStepPoint->GetMass() * 1000.f)]->GetParticleName() << '\n';
+	        massTable[(int)std::round(preStepPoint->GetMass() * 1000.f)]->GetParticleName() << ';' << mName << '\n';
 
 	detMtx.unlock();
 	return true;

@@ -32,7 +32,7 @@ def draw(particleName, clr):
             momeuntums.append((1 - (m / (T + m)) ** 2) ** 0.5)  # velocity
 
     momeuntums.sort()
-    ran = [x / 100 for x in range(110)]
+    ran = [x / 1000 for x in range(1010)]
     counts, bins = np.histogram(momeuntums, bins=ran)
     if clr == "":
         clr = Colors[str(int(round(float(ch), 0)))]
@@ -50,7 +50,7 @@ f = open(sys.argv[1])
 plt.xlabel("Out velocity(c)")
 plt.ylabel("Counts")
 plt.legend(loc="upper right")
-plt.title(f.readline())
+plt.title(sys.argv[1] + f.readline())
 plt.minorticks_on()
 
 plt.show()

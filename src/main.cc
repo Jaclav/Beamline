@@ -28,7 +28,7 @@ std::map<int, int> particleCounts;//mass to particleCounts
  */
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
-	G4double parametersDefault[] = {45, 100, 10};
+	G4double parametersDefault[] = {1, 100, 10, 0};
 	parameters = parametersDefault;
 	if(argc > 1)
 		for(int i = 1; i < argc; i++)
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 	}
 	else {
 		runManager = new G4MTRunManager();
-		runManager->SetNumberOfThreads(100);
+		runManager->SetNumberOfThreads(15);
 	}
 
 	runManager->SetUserInitialization(new Construction());
@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
 	}
 
 	std::cout << "ParticleCounts neutrons: ";
-	std::cout << particleCounts[(int)std::round(G4Neutron::Definition()->GetPDGMass() * 1000.f)];
+	std::cout << particleCounts[(int)std::round(G4Neutron::Definition()->GetPDGMass() * 1000.f)] << '\n';
 	for(auto it = massTable.begin(); it != massTable.end(); it++) {
 		if(particleCounts[(int)std::round(it->second->GetPDGMass() * 1000.f)] != 0) {
 			std::cout << ' ' << it->second->GetParticleName() << ' ' << particleCounts[(int)std::round(it->second->GetPDGMass() * 1000.f)];
