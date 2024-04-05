@@ -1,3 +1,4 @@
+#!/bin/python3
 from math import *
 import matplotlib.pyplot as plt
 import sys
@@ -78,8 +79,8 @@ while not str == "":
     str = str[str.find(";") + 1 :]
     E = str[: str.find(";")]
 
-    plt.scatter([float(X)], [float(Z)], color=Colors[charge])
-    ax.annotate(Name(mass), (float(X), float(Z)), fontsize=10)
+    plt.scatter([float(X)], [float(Y)], color=Colors[charge])
+    ax.annotate(Name(mass) + E, (float(X), float(Y)), fontsize=10)
 
 plt.gca().legend(("-", "0", "+"))
 leg = ax.get_legend()

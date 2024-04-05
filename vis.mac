@@ -1,5 +1,5 @@
 /vis/open TSG
-/vis/viewer/set/viewpointVector -1 0 0.5
+/vis/viewer/set/viewpointVector -1 1.2 0.5
 /vis/viewer/set/autoRefresh true
 
 /vis/drawVolume
