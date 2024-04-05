@@ -3,3 +3,5 @@ build/*
 *.zip
 data/*.csv
 data/crossSectionWithIwan/*
+data/sims/*/*.csv
+__pycache__
