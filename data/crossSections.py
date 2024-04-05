@@ -2,7 +2,7 @@
 import statistics as stat
 from math import *
 import matplotlib.pyplot as plt
-from data.sims.protonsThrough import *
+from sims.protonsThrough import *
 
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol
@@ -33,8 +33,8 @@ ax.set_xlabel("Energy [GeV]")
 ax.set_ylabel("Cross section [b]")
 # ax.set_xscale("log")
 ax.minorticks_on()
-fig.savefig("cross(E).png")
-ax.set_xticks([10, 15])
+fig.savefig("sims/cross(E).png")
+ax.set_xticks([4, 6, 8, 10, 12, 14, 15])
 plt.show()
 
 # https://inspirehep.net/files/8cb839c04600858cdde2de6640a11bbc
