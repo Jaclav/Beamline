@@ -2,7 +2,7 @@
 import statistics as stat
 from math import *
 import matplotlib.pyplot as plt
-from sims.simsData import *
+from data.sims.protonsThrough import *
 
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol

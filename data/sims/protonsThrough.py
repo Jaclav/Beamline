@@ -1,5 +1,5 @@
 """
-for ((x=1;x<15;x++))
+for ((x=1;x<16;x++))
 do
 ../getPerpAndPara.sh $x >> data.py
 done
