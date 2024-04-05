@@ -2,7 +2,7 @@
 #script to get number of perpendicular and parallel counts
 min=$1
 min=${min#*/}
-min=$((min*.87*1000))
+min=$((min*.652*1000))
 echo "#Minimal energy:$min"
 echo "${1#*/}:{"
 i=5

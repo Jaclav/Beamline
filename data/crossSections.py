@@ -25,11 +25,16 @@ for en in counts.keys():
     print("σ\u209A\u208A(", en, "GeV)=", crossSectionByLengths(counts[en]), "b")
     crossSections.append(crossSectionByLengths(counts[en]))
 
-plt.plot(counts.keys(), crossSections)
-plt.title("cross section of pPb collision")
-plt.xlabel("Energy [GeV]")
-plt.ylabel("Cross section [b]")
-plt.savefig("cross(E).png")
+fig = plt.figure()
+ax = fig.add_subplot()
+ax.plot(counts.keys(), crossSections)
+ax.set_title("cross section of pPb collision")
+ax.set_xlabel("Energy [GeV]")
+ax.set_ylabel("Cross section [b]")
+# ax.set_xscale("log")
+ax.minorticks_on()
+fig.savefig("cross(E).png")
+ax.set_xticks([10, 15])
 plt.show()
 
 # https://inspirehep.net/files/8cb839c04600858cdde2de6640a11bbc
