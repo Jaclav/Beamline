@@ -1,3 +1,4 @@
+#!/bin/python3
 import statistics as stat
 from math import *
 import matplotlib.pyplot as plt

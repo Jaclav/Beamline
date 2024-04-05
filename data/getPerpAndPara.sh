@@ -1,9 +1,10 @@
 #!/bin/zsh
 #script to get number of perpendicular and parallel counts
 min=$1
-min=$((min*.90*1000))
+min=${min#*/}
+min=$((min*.87*1000))
 echo "#Minimal energy:$min"
-echo "$1:{"
+echo "${1#*/}:{"
 i=5
 ls $1/*.csv | while read a;
 do

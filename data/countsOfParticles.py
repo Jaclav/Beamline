@@ -1,26 +1,42 @@
+#!/bin/python3
 import matplotlib.pyplot as plt
-import random as r
 import sys
+import statistics as st
 import numpy as np
 import matplotlib.colors as mcolors
 
-particle = "neutron"
-(mass, charge, x, y, z, energy, name) = np.loadtxt(
-    sys.argv[1], dtype="str", unpack=True, delimiter=";", skiprows=103
-)
-
+main = [
+    "e-",
+    "proton",
+    "neutron",
+]
 others = {
     "nu_mu": "olivedrab",
     "gamma": "yellow",
 }
-for i in name:
-    if not i in others.keys() and not i in ["e-", "proton", "neutron"]:
-        others[i] = ""
+
+mass = []
+energy = []
+name = []
+charge = []
+with open(sys.argv[1]) as f:
+    l = f.readline()
+    while l != "":
+        if l[0] != "#":
+            row = l.split(";")
+            if row[6] != "nu_mu" and row[7] == "detPerp\n":
+                mass.append(row[0])
+                charge.append(row[1])
+                energy.append(row[5])
+                name.append(row[6])
+                if not row[6] in others.keys() and not row[6] in main:
+                    others[row[6]] = ""
+        l = f.readline()
 
 
 def draw(particleName, clr):
     Colors = {"-1": "darkred", "0": "darkgreen", "1": "darkblue", "2": "violet"}
-    momeuntums = []
+    data = []
     ch = "0"
     for i in range(len(name)):
         if name[i] == particleName:
@@ -29,28 +45,33 @@ def draw(particleName, clr):
             m = float(mass[i])
             # momeuntums.append(((T + m) ** f2 - m**2) ** 0.5)  # momentum
             # momeuntums.append(T)  # energy
-            momeuntums.append((1 - (m / (T + m)) ** 2) ** 0.5)  # velocity
+            data.append((1 - (m / (T + m)) ** 2) ** 0.5)  # velocity
 
-    momeuntums.sort()
+    data.sort()
     ran = [x / 1000 for x in range(1010)]
-    counts, bins = np.histogram(momeuntums, bins=ran)
+    counts, bins = np.histogram(data, bins=ran)
     if clr == "":
         clr = Colors[str(int(round(float(ch), 0)))]
     plt.stairs(counts, bins, color=clr, label=particleName)
+    return data
 
 
 draw("e-", "red")
-draw("proton", "blue")
+vp = st.mode(draw("proton", "blue"))
+print("Most protons have velocity:", round(vp, 3))
+print(
+    "Most protons have energy:",
+    round(938 / (1 - vp**2) ** 0.5 - 938, 3),
+)
 draw("neutron", "lime")
 print(others)
 for o in others:
     draw(o, others[o])
 
-f = open(sys.argv[1])
 plt.xlabel("Out velocity(c)")
 plt.ylabel("Counts")
-plt.legend(loc="upper right")
-plt.title(sys.argv[1] + f.readline())
+plt.legend(loc="upper center")
+plt.title(sys.argv[1] + " perpendicular detector")
 plt.minorticks_on()
 
 plt.show()
