@@ -5,14 +5,39 @@ import matplotlib.pyplot as plt
 from sims.spallatedN import *
 
 
+tab = [
+    "",
+    "black",
+    "darkred",
+    "red",
+    "salmon",
+    "orange",
+    "yellow",
+    "olive",
+    "lime",
+    "green",
+    "cyan",
+    "royalblue",
+    "blue",
+    "violet",
+    "magenta",
+    "purple",
+]
+
+
 def plot(data, energy):
     totalCounts = {}
     for i in data.keys():
         totalCounts[i] = data[i][0] + data[i][1] * pi / atan(15 / 10)
-    plt.plot(data.keys(), totalCounts.values(), label=str(energy) + "GeV")
+    plt.plot(
+        data.keys(),
+        totalCounts.values(),
+        label=str(energy) + "GeV",
+        color=tab[int(energy)],
+    )
 
 
-for en in counts.keys():
+for en in reversed(list(counts.keys())):
     plot(counts[en], en)
 plt.legend(loc="upper left")
 plt.xlabel("L1 [cm]")
