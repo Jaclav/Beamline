@@ -1,5 +1,6 @@
 #!/bin/python3
 import matplotlib.pyplot as plt
+import math
 import sys
 import statistics as st
 import numpy as np
@@ -42,7 +43,7 @@ with open(sys.argv[1]) as f:
 
 
 def draw(particleName, clr):
-    Colors = {"-1": "darkred", "0": "darkgreen", "1": "darkblue", "2": "violet"}
+    Colors = {"-1": "tomato", "0": "forestgreen", "1": "lightcyan", "2": "violet"}
     data = []
     ch = "0"
     for i in range(len(name)):
@@ -58,10 +59,16 @@ def draw(particleName, clr):
                 data.append((1 - (m / (T + m)) ** 2) ** 0.5)
 
     data.sort()
-    counts, bins = np.histogram(data, bins=1000)
+    counts, bins = np.histogram(data, bins=500)
     if clr == "":
         clr = Colors[str(int(round(float(ch), 0)))]
-    ax.stairs(counts, bins, color=clr, label=particleName)
+    if value == "Energy":
+        logbins = np.logspace(np.log10(bins[0]), np.log10(bins[-1]), len(bins))
+        if math.isnan(logbins[0]):
+            logbins = bins
+        ax.stairs(counts, logbins, color=clr, label=particleName)
+    else:
+        ax.stairs(counts, bins, color=clr, label=particleName)
     return data
 
 
@@ -96,9 +103,15 @@ for o in others:
 
 ax.set_xlabel("Out " + value + " [" + units + "]", size=20)
 ax.set_ylabel("Counts", size=20)
-ax.legend(loc="upper center")
+ax.legend(loc="upper center", ncol=3)
 ax.set_title(sys.argv[1] + detector + "\n" + string, size=18)
 ax.minorticks_on()
-ax.set_yscale("log")
+
+if value == "Energy":
+    ax.set_yscale("log")
+    ax.set_xscale("log")
+    ax.set_xlim(10e-5)
+else:
+    ax.set_xlim([0, 1])
 
 plt.show()

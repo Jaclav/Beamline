@@ -22,12 +22,6 @@ G4bool MySensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory *ROhis
 	G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
 	G4StepPoint *postStepPoint = aStep->GetPostStepPoint();
 
-	//discard All
-	// if(mName == "detPerp" && (std::abs(postStepPoint->GetPosition().x()) > 20 || std::abs(postStepPoint->GetPosition().y()) > 20 || std::round(postStepPoint->GetMass()) != 940)) {
-	// 	track->SetTrackStatus(fStopAndKill);
-	// 	if(std::round(postStepPoint->GetMass()) == 940)
-	// 		return false;
-	// }
 	if(killAfter)
 		track->SetTrackStatus(fStopAndKill);
 

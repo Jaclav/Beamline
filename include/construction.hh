@@ -17,7 +17,6 @@
 #include "G4TransportationManager.hh"
 
 #include "detector.hh"
-#include "MyMagneticField.hh"
 #include <fstream>
 
 extern std::fstream outFile;
@@ -32,7 +31,7 @@ public:
 private:
 	G4LogicalVolume *lDetPara;
 	G4LogicalVolume *lDetPerp;
-	G4LogicalVolume *lDetEnd;
+	G4LogicalVolume *lDetFirst;
 	virtual void ConstructSDandField();
 };
 
