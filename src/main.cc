@@ -31,7 +31,7 @@ bool isUI = false;
  */
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
-	G4double parametersDefault[] = {30, 100, 10, 0.32, 10};
+	G4double parametersDefault[] = {30, 82, 10};
 	parameters = parametersDefault;
 	if(argc > 1)
 		for(int i = 1; i < argc; i++)

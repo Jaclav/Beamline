@@ -30,7 +30,7 @@ void MyGenerator::GeneratePrimaries(G4Event * event) {
 	//diameter of beam is 2cm
 	G4double r = G4UniformRand() * m / 100;
 	G4double phi = G4UniformRand() * M_PI;
-	G4ThreeVector pos(r * std::cos(phi), r * sin(phi), -.5 * m);
+	G4ThreeVector pos(r * std::cos(phi), r * sin(phi), -.4 * m);
 	fParticleGun->SetParticlePosition(pos);
 	fParticleGun->GeneratePrimaryVertex(event);
 

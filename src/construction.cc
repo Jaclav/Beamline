@@ -13,15 +13,15 @@ G4VPhysicalVolume *Construction::Construct() {
 
 	//powietrze 1x1x1
 	G4Material *worldMat = nist->FindOrBuildMaterial("G4_AIR");
-	G4Box *solidWorld = new G4Box("solidWorld", .2 * m, .2 * m, .6 * m);
+	G4Box *solidWorld = new G4Box("solidWorld", .2 * m, .2 * m, .4 * m);
 	G4LogicalVolume *logicalWorld = new G4LogicalVolume(solidWorld, worldMat, "logicalW");
 	G4VPhysicalVolume *physWorld = new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicalWorld, "physWorld", 0, false, 0, true);
 
 	// blok 4x4x10 of lead A=207.2 density=11.34
 	//https://sci-hub.st/http://dx.doi.org/10.1080/10420150601045382
-	G4double CPb = parameters[1], L1 = parameters[0], L2 = parameters[4];
-	G4Material* leadBlock = new G4Material("leadBlock", 82, 207.976 * g / mole, dPb * g / cm3); //https://www.ciaaw.org/lead.htm
-	outFile << "# L1=" << L1 << "cm " << leadBlock->GetA() / g << "Pb=" << CPb << "%m d=" << dPb << "L2=" << L2 << '\n';
+	G4double A = parameters[1], L1 = parameters[0];
+	G4Material* leadBlock = new G4Material("leadBlock", parameters[1], 0, dPb * g / cm3); //https://www.ciaaw.org/lead.htm
+	outFile << "# L1=" << L1 << "cm A=" << leadBlock->GetA() / g << " Z=" << A << " d=" << dPb << '\n';
 
 	G4Box *sLeadBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, L1 / 200. * m);
 	G4LogicalVolume *lLeadBlock = new G4LogicalVolume(sLeadBlock, leadBlock, "lBlock");
