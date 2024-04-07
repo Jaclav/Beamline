@@ -79,6 +79,7 @@ string += (
     + " for neutrons: "
     + str(round(st.mode(draw("neutron", "lime")), 3))
     + units
+    + "\n"
 )
 string += (
     "Mode "
@@ -92,11 +93,11 @@ print(others)
 for o in others:
     draw(o, others[o])
 
-ax.set_xlabel("Out " + value + " [" + units + "]")
-ax.set_ylabel("Counts")
+ax.set_xlabel("Out " + value + " [" + units + "]", size=20)
+ax.set_ylabel("Counts", size=20)
 ax.legend(loc="upper center")
-ax.set_title(sys.argv[1] + detector + "\n" + string)
+ax.set_title(sys.argv[1] + detector + "\n" + string, size=18)
 ax.minorticks_on()
-# ax.set_yscale("log")
+ax.set_yscale("log")
 
 plt.show()
