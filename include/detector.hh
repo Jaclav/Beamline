@@ -15,11 +15,12 @@ extern std::map<int, int> particleCounts;//mass to particleCounts
 
 class MySensitiveDetector: public G4VSensitiveDetector {
 public:
-	MySensitiveDetector(G4String);
+	MySensitiveDetector(G4String name, G4bool killAfter = true);
 	~MySensitiveDetector();
 private:
 	virtual G4bool ProcessHits(G4Step*, G4TouchableHistory*);
 	G4String mName;
+	G4bool killAfter;
 };
 
 #endif

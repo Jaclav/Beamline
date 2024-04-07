@@ -16,25 +16,30 @@ G4double *parameters;
 std::fstream outFile;
 std::map<int, G4ParticleDefinition*> massTable;//mass in KeV to particle data
 std::map<int, int> particleCounts;//mass to particleCounts
+bool isUI = false;
 
 /**
  * @param argc 1 when UI, 1 < when command line
  * @param argv
  * |   i   | parameter |  units  | default |
  * | :---: | :-------: | :-----: | :-----: |
- * |   0   |     L     |  (cm)   |   45    |
- * |   1   |    Pb     |   %m    |   100   |
- * |   2   |     E     | (Gev)   |   10    |
+ * |   0   |     L1    |  (cm)   |    5    |
+ * |   1   |     Pb    |   %m    |   100   |
+ * |   2   |     E     |  (Gev)  |   10    |
+ * |   3   |     D     |  (m)    |    0    |
+ * |   4   |     L2    |  (cm)   |    5    |
  */
 int main(int argc, char** argv) {
 	G4UIExecutive *ui = nullptr;
-	G4double parametersDefault[] = {1, 100, 10, 0};
+	G4double parametersDefault[] = {30, 100, 10, 0.32, 10};
 	parameters = parametersDefault;
 	if(argc > 1)
 		for(int i = 1; i < argc; i++)
 			parameters[i - 1] = std::stod(argv[i]);
-	else
+	else {
 		ui = new G4UIExecutive(argc, argv);
+		isUI = true;
+	}
 
 	std::time_t result = std::time(nullptr);
 	std::string name = std::string(std::ctime(&result));
@@ -100,6 +105,6 @@ int main(int argc, char** argv) {
 	}
 	std::cout << "\n";
 	outFile.close();
-
+	std::cout << name + ".csv\0" << '\n';
 	return 0;
 }

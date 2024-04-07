@@ -3,6 +3,7 @@ import statistics as stat
 from math import *
 import matplotlib.pyplot as plt
 from sims.spallatedN import *
+import sims.protonsThrough as throught
 
 
 tab = [
@@ -28,9 +29,9 @@ tab = [
 def plot(data, energy):
     totalCounts = {}
     for i in data.keys():
-        totalCounts[i] = (
-            data[i][0] * 2 + data[i][1] * pi / atan(15 / 10)
-        ) / 100000  # in this case we may assume that all protons react, Delta is small
+        totalCounts[i] = (data[i][0] * 2 + data[i][1] * pi / atan(15 / 10)) / (
+            100000 - throught.counts[energy][i]
+        )
     plt.plot(
         data.keys(),
         totalCounts.values(),
@@ -42,7 +43,7 @@ def plot(data, energy):
 for en in reversed(list(counts.keys())):
     plot(counts[en], en)
 plt.legend(loc="upper left")
-plt.xlabel("L1 [cm]",size=30)
+plt.xlabel("L1 [cm]", size=30)
 plt.ylabel("Number of neutrons per reaction", size=30)
-plt.title("Number of neutrons by L1 length",size=40)
+plt.title("Number of neutrons by L1 length", size=40)
 plt.show()

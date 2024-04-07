@@ -13,6 +13,7 @@
 
 extern std::fstream outFile;
 extern G4double *parameters;
+extern bool isUI;
 class MyGenerator : public G4VUserPrimaryGeneratorAction {
 public:
 	MyGenerator();

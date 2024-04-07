@@ -30,10 +30,9 @@ public:
 	~Construction();
 	virtual G4VPhysicalVolume *Construct();
 private:
-	G4LogicalVolume *lCircDet;
-	G4LogicalVolume *lPlateDet;
 	G4LogicalVolume *lDetPara;
 	G4LogicalVolume *lDetPerp;
+	G4LogicalVolume *lDetEnd;
 	virtual void ConstructSDandField();
 };
 

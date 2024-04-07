@@ -28,9 +28,10 @@ charge = []
 with open(sys.argv[1]) as f:
     l = f.readline()
     while l != "":
+        l = l[: len(l) - 1]
         if l[0] != "#":
             row = l.split(";")
-            if row[6] != "nu_mu" and row[7] == detector + "\n":
+            if row[6] != "nu_mu" and row[7] == detector:
                 mass.append(row[0])
                 charge.append(row[1])
                 energy.append(row[5])
