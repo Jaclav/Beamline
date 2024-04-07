@@ -2,6 +2,7 @@
 Smiling Of Spallation Team, Poland\
 We used standard nist AIR and lead.\
 Our detectors, are all knowing, but as we wrote from proposal we can determine particle's name from its energy and velocity
+GitHub didn't let us put all data files, because of their weights, so they are here: https://drive.google.com/drive/folders/1U2vgCLuIntWeLd-AVQ5JxnH0i5vrkNc-
 ## To run simulation:
 mkdir build\
 cmake .. -DGeant4_DIR=\<your geant4 path\>\
