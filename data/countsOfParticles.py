@@ -98,10 +98,11 @@ string += (
 )
 print(string)
 print(others)
-for o in others:
-    draw(o, others[o])
+if value != "Velocity":
+    for o in others:
+        draw(o, others[o])
 
-ax.set_xlabel("Out " + value + " [" + units + "]", size=20)
+ax.set_xlabel("Out " + value + " (v) [" + units + "]", size=20)
 ax.set_ylabel("Counts", size=20)
 ax.legend(loc="upper center", ncol=3)
 ax.set_title(sys.argv[1] + detector + "\n" + string, size=18)

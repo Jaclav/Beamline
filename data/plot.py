@@ -44,6 +44,6 @@ for en in reversed(list(counts.keys())):
     plot(counts[en], en)
 plt.legend(loc="upper left")
 plt.xlabel("L1 [cm]", size=30)
-plt.ylabel("Number of neutrons per reaction", size=30)
-plt.title("Number of neutrons by L1 length", size=40)
+plt.ylabel("n/p", size=30)
+plt.title("Number of neutrons by L length", size=40)
 plt.show()

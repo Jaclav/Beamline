@@ -2,7 +2,19 @@
 import statistics as stat
 from math import *
 import matplotlib.pyplot as plt
-from sims.protonsThrough import *
+import sys
+
+element = sys.argv[1]
+if element == "Fe":
+    from Fe.data import *
+elif element == "Pb":
+    from Pb.data import *
+elif element == "Bi":
+    from Bi.data import *
+elif element == "Sn":
+    from Sn.data import *
+elif element == "W":
+    from W.data import *
 
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol
@@ -13,7 +25,7 @@ N = Na * d / M  # number of lead nuclei per volume 1/cm3
 def crossSectionByLengths(data):
     totalCounts = {}
     for i in data.keys():
-        totalCounts[i] = data[i][0] + data[i][1] * pi / atan(15 / 10)
+        totalCounts[i] = data[i][0] + data[i][1] * pi / atan(15 / 15)
     crossSec = []
     for i in data.keys():
         crossSec.append(-1 / (i * N) * log(totalCounts[i] / 100000) * 10**24)
@@ -28,9 +40,9 @@ for en in counts.keys():
 fig = plt.figure()
 ax = fig.add_subplot()
 ax.plot(counts.keys(), crossSections)
-ax.set_title("cross section of pPb collision", size=40)
-ax.set_xlabel("Energy [GeV]", size=20)
-ax.set_ylabel("Cross section [b]", size=20)
+ax.set_title("cross section of p" + element + " collision", size=40)
+ax.set_xlabel("Energy (E\u2096) [GeV]", size=20)
+ax.set_ylabel("Cross section (σ\u209A \u209B\u2099) [b]", size=20)
 # ax.set_xscale("log")
 ax.minorticks_on()
 fig.savefig("sims/cross(E).png")
