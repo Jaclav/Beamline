@@ -4,20 +4,30 @@ from math import *
 import matplotlib.pyplot as plt
 import sys
 
-element = sys.argv[1]
-if element == "Fe":
-    from Fe.data import *
-elif element == "Pb":
-    from Pb.data import *
-elif element == "Bi":
-    from Bi.data import *
-elif element == "Sn":
-    from Sn.data import *
-elif element == "W":
-    from W.data import *
-
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol
+element = sys.argv[1]
+if element == "Fe":
+    d = 7.874
+    M = 55.85
+    from Fe.data import *
+elif element == "Pb":
+    d = 11.34
+    M = 207.217
+    from Pb.data import *
+elif element == "Bi":
+    d = 9.78
+    M = 208.9804
+    from Bi.data import *
+elif element == "Sn":
+    d = 7.31
+    M = 118.71
+    from Sn.data import *
+elif element == "W":
+    d = 19.25
+    M = 183.84
+    from W.data import *
+
 Na = 6.02214076e23  # avogadro constant
 N = Na * d / M  # number of lead nuclei per volume 1/cm3
 

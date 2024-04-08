@@ -20,8 +20,27 @@ G4VPhysicalVolume *Construction::Construct() {
 	// blok 4x4x10 of lead A=207.2 density=11.34
 	//https://sci-hub.st/http://dx.doi.org/10.1080/10420150601045382
 	G4double A = parameters[1], L1 = parameters[0];
-	G4Material* leadBlock = new G4Material("leadBlock", parameters[1], 0, dPb * g / cm3); //https://www.ciaaw.org/lead.htm
-	outFile << "# L1=" << L1 << "cm A=" << leadBlock->GetA() / g << " Z=" << A << " d=" << dPb << '\n';
+	switch((int)parameters[1]) {
+	case 82:
+		density = 11.34;
+		break;
+	case 50:
+		density = 7.31;
+		break;
+	case 26:
+		density = 7.874;
+		break;
+	case 83:
+		density = 9.78;
+		break;
+	case 74:
+		density = 19.25;
+		break;
+	default:
+		exit(-1);
+	}
+	G4Material* leadBlock = new G4Material("leadBlock", parameters[1], 0, density * g / cm3);
+	outFile << "# L1=" << L1 << "cm A=" << leadBlock->GetA() / g << " Z=" << A << " d=" << density << '\n';
 
 	G4Box *sLeadBlock = new G4Box("solidBlock", 0.02 * m, .02 * m, L1 / 200. * m);
 	G4LogicalVolume *lLeadBlock = new G4LogicalVolume(sLeadBlock, leadBlock, "lBlock");

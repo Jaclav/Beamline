@@ -21,7 +21,6 @@
 
 extern std::fstream outFile;
 extern G4double *parameters;
-constexpr G4double dBi = 9.78, dPb = 11.34;
 
 class Construction : public G4VUserDetectorConstruction {
 public:
@@ -32,6 +31,7 @@ private:
 	G4LogicalVolume *lDetPara;
 	G4LogicalVolume *lDetPerp;
 	G4LogicalVolume *lDetFirst;
+	G4double density;
 	virtual void ConstructSDandField();
 };
 
