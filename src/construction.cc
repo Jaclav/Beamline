@@ -24,6 +24,9 @@ G4VPhysicalVolume *Construction::Construct() {
 	case 82:
 		density = 11.34;
 		break;
+	case 14:
+		density = 28.09;
+		break;
 	case 50:
 		density = 7.31;
 		break;
