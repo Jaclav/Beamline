@@ -9,12 +9,16 @@ import matplotlib.colors as mcolors
 detector = sys.argv[2]
 value = str(sys.argv[3])
 units = ""
+var = ""
 if value == "Energy":
     units = "MeV"
+    var = "E\u2096"
 elif value == "Momentum":
     units = "GeV/c"
+    var = "p"
 elif value == "Velocity":
     units = "c"
+    var = "v"
 
 main = [
     "e-",
@@ -66,67 +70,60 @@ def draw(particleName, clr):
                 data.append((1 - (m / (T + m)) ** 2) ** 0.5)
 
     data.sort()
-    counts, bins = np.histogram(data, bins=500)
+    counts, bins = np.histogram(data, bins=200)
     if clr == "":
         clr = Colors[str(int(round(float(ch), 0)))]
     if value == "Energy":
         logbins = np.logspace(np.log10(bins[0]), np.log10(bins[-1]), len(bins))
         if math.isnan(logbins[0]):
             logbins = bins
-        ax.stairs(counts, logbins, color=clr, label=particleName)
-    else:
-        ax.stairs(counts, bins, color=clr, label=particleName)
-    return data
+        bins = logbins
 
+    counts = list(counts)
+    counts.append(counts[-1])
+    return counts, bins, data
+
+
+c, b, d1 = draw("proton", "blue")
+c2, b2, d2 = draw("neutron", "lime")
+c3, b3, d3 = draw("e-", "red")
 
 string = ""
+string += "Mode " + value + " for protons: " + str(round(st.mode(d1), 3)) + units + "\n"
 string += (
-    "Mode "
-    + value
-    + " for protons: "
-    + str(round(st.mode(draw("proton", "blue")), 3))
-    + units
-    + "\n"
+    "Mode " + value + " for neutrons: " + str(round(st.mode(d2), 3)) + units + "\n"
 )
-string += (
-    "Mode "
-    + value
-    + " for neutrons: "
-    + str(round(st.mode(draw("neutron", "lime")), 3))
-    + units
-    + "\n"
-)
-string += (
-    "Mode "
-    + value
-    + " for electrons: "
-    + str(round(st.mode(draw("e-", "red")), 3))
-    + units
-)
+string += "Mode " + value + " for electrons: " + str(round(st.mode(d3), 3)) + units
 print(string)
 print(others)
-if value != "Velocity":
-    for o in others:
-        draw(o, others[o])
 
-ax.set_xlabel("Out " + value + " (E\u2096) [" + units + "]", size=18)
+ax.set_xlabel("Out " + value + " (" + var + ") [" + units + "]", size=18)
 ax.set_ylabel("Counts", size=18)
-ax.legend(loc="upper center", ncol=4)
-ax.set_title(
-    # sys.argv[1] +
-    detector + "\n" + string,
-    size=10,
-)
+ax.set_title(detector + "\n" + string, size=10)
 ax.minorticks_on()
 
 if value == "Energy":
+    ax.minorticks_on()
+    # plt.stackplot(
+    #     b3, [c3, b3], labels=["e-"], colors=["red"], baseline="weighted_wiggle"
+    # )
+    # plt.stackplot(b, [c, b], labels=["p"], colors=["blue"], baseline="weighted_wiggle")
+    # plt.stackplot(
+    #     b2, [c2, b2], labels=["n"], colors=["lime"], baseline="weighted_wiggle"
+    # )
     ax.set_yscale("log")
     ax.set_xscale("log")
+    ax.stairs(c[0:-1], b, color="blue", label="proton")
+    ax.stairs(c2[0:-1], b2, color="lime", label="neutron")
+    ax.stairs(c3[0:-1], b3, color="red", label="e-")
     ax.set_xlim([10 ** (-4.1), 10 ** (4.1)])
-    ax.minorticks_on()
 else:
+    ax.stairs(c[0:-1], b, color="blue", label="proton")
+    ax.stairs(c2[0:-1], b2, color="lime", label="neutron")
+    ax.stairs(c3[0:-1], b3, color="red", label="e-")
     ax.set_xlim([0, 1.05])
 
+ax.legend(loc="upper center", ncol=4)
 plt.tight_layout()
 plt.savefig("plots/Counts" + value + detector + ".png")
 # plt.show()
