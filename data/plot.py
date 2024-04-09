@@ -62,9 +62,12 @@ def plot(data, energy):
 
 for en in reversed(list(counts.keys())):
     plot(counts[en], en)
-plt.legend(loc="upper left", prop={"size": 13}, ncol=2)
-plt.xlabel("Sample length (L) [cm]", size=30)
-plt.ylabel("proportion n/p", size=30)
-plt.title(element, size=40)
+
+plt.legend(prop={"size": 9})
+plt.xlabel("sample length (L) [cm]", size=14)
+plt.ylabel("proportion n/p", size=14)
+plt.title(element, size=20)
+plt.xlim([5, 36])
+plt.tight_layout()
 plt.savefig("plots/np(L)" + element + ".png")
 plt.show()
