@@ -6,18 +6,23 @@ import sys
 
 element = sys.argv[1]
 if element == "Fe":
-    import Fe.data as through
+    import Fe.through as through
+    from Fe.spallatedN import *
 elif element == "Pb":
-    import Pb.data as through
+    import Pb.through as through
     from Pb.spallatedN import *
 elif element == "Bi":
-    import Bi.data as through
+    import Bi.through as through
+    from Bi.spallatedN import *
 elif element == "Sn":
-    import Sn.data as through
+    import Sn.through as through
     from Sn.spallatedN import *
 elif element == "W":
-    import W.data as through
-
+    import W.through as through
+    from W.spallatedN import *
+elif element == "Si":
+    import Si.through as through
+    from Si.spallatedN import *
 
 tab = {
     0.5: "black",
@@ -61,4 +66,5 @@ plt.legend(loc="upper left", prop={"size": 13}, ncol=2)
 plt.xlabel("Sample length (L) [cm]", size=30)
 plt.ylabel("proportion n/p", size=30)
 plt.title(element, size=40)
+plt.savefig("plots/np(L)" + element + ".png")
 plt.show()

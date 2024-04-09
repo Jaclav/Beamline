@@ -5,15 +5,21 @@ do
 	#script to get number of perpendicular and parallel counts
 	min=$b
 	min=${min#*/}
-	min=$((min*0.9*1000))
+	if [ $1 = "neutron" ]
+	then
+		min=0
+	else
+		min=$((min*0.9*1000))
+	fi
+
 	echo "#Minimal energy:$min"
 	echo "${b#*/}:{"
 	i=5
 	ls $b/*.csv | while read a;
 	do
 		echo -n $i":["
-		echo -n `grep "proton;detPerp" $a| awk -F";" '{if($6 > '$min'){print $6}}' | wc -l`
-		echo -n ","`grep "proton;detPara" $a | awk -F";" '{if($6 > '$min'){print $6}}'| wc -l` "]"
+		echo -n `grep "$1;detPerp" $a| awk -F";" '{if($6 > '$min'){print $6}}' | wc -l`
+		echo -n ","`grep "$1;detPara" $a | awk -F";" '{if($6 > '$min'){print $6}}'| wc -l` "]"
 		echo ","
 		i=$((i+5))
 	done

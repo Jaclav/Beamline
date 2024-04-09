@@ -13,27 +13,27 @@ element = sys.argv[1]
 if element == "Fe":
     d = 7.874
     M = 55.85
-    from Fe.data import *
+    from Fe.through import *
 elif element == "Pb":
     d = 11.34
     M = 207.217
-    from Pb.data import *
+    from Pb.through import *
 elif element == "Bi":
     d = 9.78
     M = 208.9804
-    from Bi.data import *
+    from Bi.through import *
 elif element == "Sn":
     d = 7.31
     M = 118.71
-    from Sn.data import *
+    from Sn.through import *
 elif element == "W":
     d = 19.25
     M = 183.84
-    from W.data import *
+    from W.through import *
 elif element == "Si":
     d = 2.33
     M = 28.085
-    from Si.data import *
+    from Si.through import *
 
 Na = 6.02214076e23  # avogadro constant
 N = Na * d / M  # number of lead nuclei per volume 1/cm3
@@ -62,7 +62,7 @@ ax.set_xlabel("Energy (E\u2096) [GeV]", size=20)
 ax.set_ylabel("Cross section (σ\u209A) [b]", size=20)
 # ax.set_xscale("log")
 ax.minorticks_on()
-fig.savefig("sims/cross(E).png")
+fig.savefig("plots/crossSection" + element + ".png")
 ax.set_xticks([4, 6, 8, 10, 12, 14, 15])
 plt.show()
 
