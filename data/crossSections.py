@@ -4,8 +4,12 @@ from math import *
 import matplotlib.pyplot as plt
 import sys
 
-# import matplotlib
-# matplotlib.rcParams["font.family"] = "stix"
+"""'
+for x in {Bi,Fe,Pb,Si,Sn,W}
+do
+./crossSections.py $x
+done
+"""
 
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol
@@ -57,6 +61,7 @@ for en in counts.keys():
 fig = plt.figure()
 ax = fig.add_subplot()
 ax.plot(counts.keys(), crossSections)
+ax.scatter(counts.keys(), crossSections)
 ax.set_title("σ\u209A in p" + element + " collision", size=30)
 ax.set_xlabel("Energy (E\u2096) [GeV]", size=18)
 ax.set_ylabel("Cross section (σ\u209A) [b]", size=18)
