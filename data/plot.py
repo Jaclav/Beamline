@@ -45,6 +45,9 @@ tab = {
     15: "purple",
 }
 
+fig = plt.figure()
+ax = fig.add_subplot()
+
 
 def plot(data, energy):
     totalCounts = {}
@@ -52,7 +55,7 @@ def plot(data, energy):
         totalCounts[i] = (data[i][0] * 2 + data[i][1] * pi / atan(15 / 15)) / (
             100000  # - through.counts[energy][i][0]
         )
-    plt.plot(
+    ax.plot(
         data.keys(),
         totalCounts.values(),
         label=str(energy) + "GeV",
@@ -63,11 +66,11 @@ def plot(data, energy):
 for en in reversed(list(counts.keys())):
     plot(counts[en], en)
 
-plt.legend(prop={"size": 9})
-plt.xlabel("sample length (L) [cm]", size=14)
-plt.ylabel("proportion (n/p)", size=14)
-plt.title(element, size=20)
-plt.xlim([5, 36])
-plt.tight_layout()
-plt.savefig("plots/np(L)" + element + ".png")
-plt.show()
+ax.legend(prop={"size": 9})
+ax.set_xlabel("sample length ($L$) [cm]", size=14)
+ax.set_ylabel("proportion ($n/p_r$)", size=14)
+ax.set_title(element, size=20)
+ax.set_xlim([5, 36])
+fig.tight_layout()
+fig.savefig("plots/np(L)" + element + ".png")
+# plt.show()
