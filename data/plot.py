@@ -65,7 +65,7 @@ for en in reversed(list(counts.keys())):
 
 plt.legend(prop={"size": 9})
 plt.xlabel("sample length (L) [cm]", size=14)
-plt.ylabel("proportion n/p", size=14)
+plt.ylabel("proportion (n/p)", size=14)
 plt.title(element, size=20)
 plt.xlim([5, 36])
 plt.tight_layout()
