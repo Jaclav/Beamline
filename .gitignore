@@ -6,3 +6,4 @@ data/crossSectionWithIwan/*
 data/sims/*/*.csv
 __pycache__
 data/*/*/*.csv
+data/Old/*

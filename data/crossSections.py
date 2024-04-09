@@ -4,6 +4,9 @@ from math import *
 import matplotlib.pyplot as plt
 import sys
 
+# import matplotlib
+# matplotlib.rcParams["font.family"] = "stix"
+
 d = 11.34  # density g/cm3
 M = 207.217  # molar mass g/mol
 element = sys.argv[1]
@@ -27,6 +30,10 @@ elif element == "W":
     d = 19.25
     M = 183.84
     from W.data import *
+elif element == "Si":
+    d = 2.33
+    M = 28.085
+    from Si.data import *
 
 Na = 6.02214076e23  # avogadro constant
 N = Na * d / M  # number of lead nuclei per volume 1/cm3
@@ -50,9 +57,9 @@ for en in counts.keys():
 fig = plt.figure()
 ax = fig.add_subplot()
 ax.plot(counts.keys(), crossSections)
-ax.set_title("cross section of p" + element + " collision", size=40)
+ax.set_title("σ\u209A in p" + element + " collision", size=40)
 ax.set_xlabel("Energy (E\u2096) [GeV]", size=20)
-ax.set_ylabel("Cross section (σ\u209A \u209B\u2099) [b]", size=20)
+ax.set_ylabel("Cross section (σ\u209A) [b]", size=20)
 # ax.set_xscale("log")
 ax.minorticks_on()
 fig.savefig("sims/cross(E).png")
