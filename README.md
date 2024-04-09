@@ -13,13 +13,13 @@ cp ../*.mac #copy macro files\
 Output #!!!! Unknown  means that simulation created particle unknown to geant4 particle table
 ## files in data/ - our plots making scripts
 in /sims catalog we have our simulation results in catalogs named after beam energy
-| file                 | description                                                                                                          |                    parameters                     |
-| :------------------- | :------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------: |
-| getPerpAndPara       | gives information how many neutrons or protons came through which detector and generates output for crossSections.py |                 type of particle                  |
-| countsOfParticles.py | gives information about how many counts corresponds to which energy or velocity                                      | file.csv detPerp/detPara Energy/Momentum/Velocity |
-| crossSections.py     | gives plot of cross section versus energy                                                                            |         (gets data from sims/through.py)          |
-| data.py              | gives information about number and position of specific particle                                                     |        (gets data from sims/spallatedN.py)        |
-| Z.py                 | gives information about where on Z axis particle was found, we can approximate mean free path from this              |                     file.csv                      |
+| file                   | description                                                                                                          |                    parameters                     |
+| :--------------------- | :------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------: |
+| getPerpAndPara         | gives information how many neutrons or protons came through which detector and generates output for crossSections.py |                 type of particle                  |
+| countsOfParticles.py   | gives information about how many counts corresponds to which energy or velocity                                      | file.csv detPerp/detPara Energy/Momentum/Velocity |
+| crossSections.py       | gives plot of cross section versus energy                                                                            |         (gets data from sims/through.py)          |
+| positionAndCounting.py | gives information about number and position of specific particle                                                     |        (gets data from sims/spallatedN.py)        |
+| Z.py                   | gives information about where on Z axis particle was found, we can approximate mean free path from this              |                     file.csv                      |
 ## script.sh
 It runs simulation for all energies and all lengths, creates folders named after beam energy
 ## csv files
