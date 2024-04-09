@@ -8,7 +8,14 @@ import matplotlib.colors as mcolors
 
 detector = sys.argv[2]
 value = str(sys.argv[3])
-units = str(sys.argv[4])
+units = ""
+if value == "Energy":
+    units = "MeV"
+elif value == "Momentum":
+    units = "GeV/c"
+elif value == "Velocity":
+    units = "c"
+
 main = [
     "e-",
     "proton",
@@ -102,17 +109,24 @@ if value != "Velocity":
     for o in others:
         draw(o, others[o])
 
-ax.set_xlabel("Out " + value + " (v) [" + units + "]", size=20)
-ax.set_ylabel("Counts", size=20)
-ax.legend(loc="upper center", ncol=3)
-ax.set_title(sys.argv[1] + detector + "\n" + string, size=18)
+ax.set_xlabel("Out " + value + " (E\u2096) [" + units + "]", size=18)
+ax.set_ylabel("Counts", size=18)
+ax.legend(loc="upper center", ncol=4)
+ax.set_title(
+    # sys.argv[1] +
+    detector + "\n" + string,
+    size=10,
+)
 ax.minorticks_on()
 
 if value == "Energy":
     ax.set_yscale("log")
     ax.set_xscale("log")
-    ax.set_xlim(10e-5)
+    ax.set_xlim([10 ** (-4.1), 10 ** (4.1)])
+    ax.minorticks_on()
 else:
-    ax.set_xlim([0, 1])
+    ax.set_xlim([0, 1.05])
 
-plt.show()
+plt.tight_layout()
+plt.savefig("plots/Counts" + value + detector + ".png")
+# plt.show()
